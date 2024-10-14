@@ -3,9 +3,6 @@
 # This file provides an easy way to add custom menu entries.  Simply type the
 # menu entries you want to add after this comment.  Be careful not to change
 # the 'exec tail' line above.
-#
-#
-#
 
 set -e 
 
@@ -14,10 +11,12 @@ printf "Adding all grub entries ...\n" >&2
 cat << EOF
 menuentry 'Arch Linux (linux-zen)' {
     insmod ext2
-    set root=(hd1,6)
-    linux /Linux/vmlinuz-linux-zen root=/dev/sdb3 rw
-    initrd /Linux/initramfs-linux-zen.img
+    set root=(hd1,6) # Change accordingly, use the 'ls' command in grub command line
+    linux /Linux/vmlinuz-linux-zen root=/dev/sdb3 rw # Does not need full directory, only needs from root folder. root=/dev/sdb3 is root of filesystem
+    initrd /Linux/initramfs-linux-zen.img # initramfs
 }
+
+# Below is the same as above. Change accordingly
 
 menuentry 'Arch Linux (linux-zen fallback)' {
     insmod ext2
