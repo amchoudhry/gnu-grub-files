@@ -1,0 +1,62 @@
+#!/bin/sh
+# exec tail -n +3 $0
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+#
+#
+#
+
+set -e 
+
+printf "Adding all grub entries ...\n" >&2
+
+cat << EOF
+menuentry 'Arch Linux (linux-zen)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux-zen root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux-zen.img
+}
+
+menuentry 'Arch Linux (linux-zen fallback)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux-zen root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux-zen-fallback.img
+}
+
+menuentry 'Arch Linux (linux-lts)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux-lts root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux-lts.img
+}
+
+menuentry 'Arch Linux (linux-lts fallback)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux-lts root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux-lts-fallback.img
+}
+
+menuentry 'Arch Linux (linux)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux.img
+}
+
+menuentry 'Arch Linux (linux fallback)' {
+    insmod ext2
+    set root=(hd1,6)
+    linux /Linux/vmlinuz-linux root=/dev/sdb3 rw
+    initrd /Linux/initramfs-linux-fallback.img
+}
+
+menuentry 'Windows 10' {
+    set root=(hd1,6)
+    chainloader /Microsoft/Boot/bootmgfw.efi
+}
+EOF
+
